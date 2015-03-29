@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>autoKeyTest - a test page for developers crazy enough to try and develop page for moblie broswers that relies on key events and key codes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="keydown keypress keyup e.type e.which String.fromCharCode e.shiftKey e.ctrlKey e.altKey e.metaKey" />
+<style>
+body {
+	margin-left: 50px;
+}
+input {
+	text-align:center;
+	width: 100px;
+	padding: 0px;
+	margin: 0px;
+}
+td {
+	width: 100px;
+}
+.rowLabel {
+	text-align:right;
+	width: 100px;
+}
+#main {
+	width: 600Px;
+}
+</style>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+
+jQuery(function($) {
+	var eventTiming = 0,
+		inputEvent = 0,
+		keyupEvent = false;
+	$('#testkey').on('keydown', function (e) {
+        if (e.which === null && (e.charCode !== null || e.keyCode !== null)) {
+        	e.which = e.charCode !== null ? e.charCode : e.keyCode
+		}
+		$('#kde').val(e.type);
+		$('#kdCode').val(e.which);
+		$('#kdfcc').val(String.fromCharCode(e.which));
+		$('#kdsk').val(e.shiftKey);
+		$('#kdck').val(e.ctrlKey);
+		$('#kdak').val(e.altKey);
+		$('#kdmk').val(e.metaKey);
+		eventTiming = eventTiming + 1;
+		$('#kdt').val(eventTiming);	
+		
+	});	
+	$('#testkey').on('keypress', function (e) {
+		if (e.which === null && (e.charCode !== null || e.keyCode !== null)) {
+        	e.which = e.charCode !== null ? e.charCode : e.keyCode
+		}
+		$('#kpe').val(e.type);
+		$('#kpCode').val(e.which);
+		$('#kpfcc').val(String.fromCharCode(e.which));
+		$('#kpsk').val(e.shiftKey);
+		$('#kpck').val(e.ctrlKey);
+		$('#kpak').val(e.altKey);
+		$('#kpmk').val(e.metaKey);				
+		eventTiming = eventTiming + 1;
+		$('#kpt').val(eventTiming);	
+		
+	});
+	$('#testkey').on('input', function (e) {
+		eventTiming = eventTiming + 1;
+		var multiple = $('#kit').val();
+		multiple = (multiple === '') ? eventTiming : multiple + ', ' + eventTiming;
+		$('#kit').val(multiple);
+		if (e.which === null && (e.charCode !== null || e.keyCode !== null)) {
+        	e.which = e.charCode !== null ? e.charCode : e.keyCode
+		}
+		$('#kie').val(e.type);
+		$('#kiCode').val(e.which);
+		$('#kifcc').val(String.fromCharCode(e.which));
+		$('#kisk').val(e.shiftKey);
+		$('#kick').val(e.ctrlKey);
+		$('#kiak').val(e.altKey);
+		$('#kimk').val(e.metaKey);		
+    });		
+	$('#testkey').on('keyup', function (e) {
+		if (e.which === null && (e.charCode !== null || e.keyCode !== null)) {
+        	e.which = e.charCode !== null ? e.charCode : e.keyCode
+		}
+		$('#kue').val(e.type);
+		$('#kuCode').val(e.which);
+		$('#kufcc').val(String.fromCharCode(e.which));
+		$('#kusk').val(e.shiftKey);
+		$('#kuck').val(e.ctrlKey);
+		$('#kuak').val(e.altKey);
+		$('#kumk').val(e.metaKey);
+		eventTiming = eventTiming + 1;
+		$('#kut').val(eventTiming);	
+	});	
+	$("form").on("reset",function(){
+		  eventTiming = 0;
+		  $('#testkey').focus();
+	});
+	$("#resetvalue").on("click",function(){
+		  eventTiming = 0;
+		  $('.clear').val('');
+		  $('#testkey').val('testing 123');
+		  $('#testkey').focus();
+	});	
+});
+
+</script>
+</head>
+<body>
+<div id="main">
+  <div style="float:right; margin-top:5px">
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="display:inline">
+      <input type="hidden" name="cmd" value="_s-xclick" />
+      <input type="hidden" name="hosted_button_id" value="NCW5699RY8NN2" />
+      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+      <img src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" alt="PayPal" width="1" height="1" border="0" style="display:inline" />
+    </form>
+  </div>
+  <p></p>
+  <h1>autoKeyTest <span style="font-size:14px"> - version 1.0 - 2015/03/29</span></h1>
+  <p><strong>author: Robert Knothe</strong></p>
+  <p>A test page for developers crazy enough to try and develop page  that relies on key events and key codes for mobile browsers.</p>
+  <p>This  page was created to test mobile browsers support for the key events and key codes. My jQuery plugin  "<a href="http://www.decorplanit.com/plugin/">autoNumeric</a>" relies heavily on &quot;keydown&quot;, &quot;keypress&quot;, &quot;keyup&quot; and &quot;keyCode&quot; to function properly. </p>
+  <p>Most  android browsers (including Chrome) and Windows Mobile browser do not support all of the events, the order which events fire  and or return incorrect key codes for alpha characters that their desktop counterparts do properly, which has cost me countless hours trying to modify my code to compensate for their bugs.</p>
+  <p><strong>Directions:</strong></p>
+  <ol>
+    <li>Enter any character in the top input and see the results.</li>
+    <li>Reset the form after each entry and enter a different key.</li>
+    <li>Reset the form with a value.
+      <ol type="a" style="font-size:14px; padding-left: 20px;">
+        <li>Use to test the back &amp; delete keys.</li>
+        <li>Some mobile (FF - android) browsers throw events differently when a value is present. </li>
+      </ol>
+      <br />
+    </li>
+  </ol>
+  <form>
+    <table border="0">
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="4"><div align="center">Enter value here</div></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="4"><div align="center">
+            <input style="text-align:center" type="text" value="" class="" id="testkey"/>
+          </div></td>
+      </tr>
+      <tr>
+        <td class="rowLabel">eventTiming:</td>
+        <td><input type="text" value="" id="kdt" class="clear" /></td>
+        <td><input type="text" value="" id="kpt" class="clear"/></td>
+        <td><input type="text" value="" id="kit" class="clear" /></td>
+        <td><input type="text" value="" id="kut" class="clear"/></td>
+      </tr>
+      <tr>
+        <td class="rowLabel">event.type:</td>
+        <td><input type="text" value="" id="kde" class="clear" /></td>
+        <td><input type="text" value="" id="kpe" class="clear"/></td>
+        <td><input type="text" value="" id="kie" class="clear" /></td>
+        <td><input type="text" value="" id="kue" class="clear"/></td>
+      </tr>
+      <tr>
+        <td class="rowLabel">event.keyCode:</td>
+        <td><input type="text" value="" id="kdCode" class="clear" /></td>
+        <td><input type="text" value="" id="kpCode" class="clear"/></td>
+        <td><input type="text" value="" id="kiCode" class="clear" /></td>
+        <td><input type="text" value="" id="kuCode" class="clear"/></td>
+      </tr>
+      <tr>
+        <td class="rowLabel">fromCharCode:</td>
+        <td><input type="text" value="" id="kdfcc" class="clear"/></td>
+        <td><input type="text" value="" id="kpfcc" class="clear"/></td>
+        <td><input type="text" value="" id="kifcc" class="clear"/></td>
+        <td><input type="text" value="" id="kufcc" class="clear"/></td>
+      </tr>
+      <tr>
+        <td class="rowLabel">event.shiftKey:</td>
+        <td><input type="text" value="" id="kdsk" class="clear"/></td>
+        <td><input type="text" value="" id="kpsk" class="clear"/></td>
+        <td><input type="text" value="" id="kisk" class="clear"/></td>
+        <td><input type="text" value="" id="kusk" class="clear"/></td>
+      </tr>
+      <tr>
+        <td class="rowLabel">event.ctrlKey:</td>
+        <td><input type="text" value="" id="kdck" class="clear"/></td>
+        <td><input type="text" value="" id="kpck" class="clear"/></td>
+        <td><input type="text" value="" id="kick" class="clear"/></td>
+        <td><input type="text" value="" id="kuck" class="clear"/></td>
+      </tr>
+      <tr>
+        <td class="rowLabel">event.altKey:</td>
+        <td><input type="text" value="" id="kdak" class="clear"/></td>
+        <td><input type="text" value="" id="kpak" class="clear"/></td>
+        <td><input type="text" value="" id="kiak" class="clear"/></td>
+        <td><input type="text" value="" id="kuak" class="clear"/></td>
+      </tr>
+      <tr>
+        <td class="rowLabel">event.metaKey:</td>
+        <td><input type="text" value="" id="kdmk" class="clear"/></td>
+        <td><input type="text" value="" id="kpmk" class="clear"/></td>
+        <td><input type="text" value="" id="kimk" class="clear"/></td>
+        <td><input type="text" value="" id="kumk" class="clear"/></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td align="right"><input style="width:100px" type="reset" name="reset" id="reset" value="Reset" /></td>
+        <td><input style="width:100px" type="button" name="resetValue" id="resetvalue" value="Reset w/value" /></td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+  </form>
+  <div id="notes">
+    <p><strong>Notes:</strong></p>
+    <p>For the most accurate results reset the form after each key is pressed. <em>This is important becuase many mobile (android &amp; Window's) browsers do not function the same as their desktop counterparts.</em></p>
+    <p>All major desktop browser return the correct character code and throw events in the following order:</p>
+    <ol>
+      <li>keydown</li>
+      <li>keypress</li>
+      <li>input</li>
+      <li>keyup</li>
+    </ol>
+    <p>The proliferation of android  browsers has created a mess. The tests show inconsistancies  between the various browsers let alone their versions deployed.</p>
+    <p>You would think with one browser Microsoft could get it right - not so!</p>
+    <p><strong>Recomendations:</strong></p>
+    <ul>
+      <li>Avoid using &quot;keypress&quot; event because many of the android browsers do not support on alpha characters</li>
+      <li>Avoid using &quot;character codes&quot; on android broswers </li>
+      <li>The &quot;input&quot; event generally fires but the order varies greatly. I have seen it fire &quot;onfocus&quot;, before &quot;keydown&quot; and after &quot;keyup&quot; depending on the browser.</li>
+    </ul>
+    <p><strong>Do the right thing - </strong>mobile browser that get most of it right: </p>
+    <ul>
+      <li>Safari ios</li>
+      <li>Dolphin for android - has come a long way.</li>
+    </ul>
+    <p>Published under the MIT License <a href="http://www.opensource.org/licenses/mit-license.php">http://www.opensource.org/licenses/mit-license.php</a></p>
+  </div>
+</div>
+</body>
+</html>

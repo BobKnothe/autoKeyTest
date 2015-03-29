@@ -1,0 +1,33 @@
+{
+  "name": "autoKeyTest",
+  "version": "1.0",
+  "main": "./autoKeyTest.html",
+  "keywords": [
+    "keydown",
+    "keypress",
+    "input",
+	"e.type",
+	"e.which",
+	"String.fromCharCode",
+	"e.shiftKey",
+	"e.ctrlKey"
+	"e.altKey",
+	"e.metaKey"
+  ],
+  "description": "autoKeyTest is a simple one page / script, yet powerful tool to test browsers (particularly mobile browsers) for their support for key events and codes in HTML inputs elements.",
+  "license": "http://opensource.org/licenses/mit-license.php",
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "authors": [{
+    "name": "Robert Knothe"
+  }],
+  "homepage": "http://www.decorplanit.com/autoKeyTest/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
